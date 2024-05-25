@@ -3,6 +3,8 @@ extends CharacterBody2D
 signal place(tile)
 signal destroy(tile)
 
+@onready var toolbar = %Toolbar
+
 var toolIndex = 0
 var tools = ["none", "hoe"]
 
@@ -53,7 +55,7 @@ func playerMovement():
 		
 	return(velocity)
 	
-func tileChange(tile ):
+func tileChange(tile):
 	if (position - get_global_mouse_position()).length() < 300: # TODO: Place at limits of reach
 		if tile == "till":
 			place.emit("soil")
@@ -66,12 +68,18 @@ func _physics_process(delta):
 	changeRunningValue() # if shift is pressed
 	velocity = playerMovement() 
 	
-	if Input.is_action_just_pressed("1"): toolIndex = 1
-	elif Input.is_action_just_pressed("2"): toolIndex = 2
+	#if Input.is_action_just_pressed("1"): toolIndex = 0
+	#elif Input.is_action_just_pressed("2"): toolIndex = 1
 	
 	
-	if Input.is_action_just_pressed("rightClick"): tileChange("till")
-	if Input.is_action_just_pressed("leftClick"): toolToAction[tools[toolIndex]]["leftClick"].call(toolToAction[tools[toolIndex]]["leftClickArgument"])
+	if Input.is_action_just_pressed("rightClick"): 
+		tileChange("till")
+		if toolbar.currentTool.has_method("leftClick"): toolbar.currentTool.leftClick()
+		
+	if Input.is_action_just_pressed("leftClick"): 
+		toolToAction[tools[toolIndex]]["leftClick"].call(toolToAction[tools[toolIndex]]["leftClickArgument"])
+		if toolbar.currentTool.has_method("rightClick"): toolbar.currentTool.rightClick()
+	
 	if Input.is_action_just_pressed("esc"): get_tree().quit()
 
 	move_and_slide()

@@ -10,8 +10,8 @@
 [ext_resource type="Script" path="res://playerCam.gd" id="6_4gcos"]
 [ext_resource type="AudioStream" uid="uid://bxh5m50nr3lvk" path="res://Stream Loops 2024-01-24_01.ogg" id="9_q570b"]
 [ext_resource type="Script" path="res://Inventory.gd" id="10_sx7c0"]
-[ext_resource type="Resource" uid="uid://cknxhxwhl7x7j" path="res://data/tools/hoe.tres" id="11_rruha"]
-[ext_resource type="Resource" uid="uid://xeqpt2ju3ini" path="res://data/tools/none.tres" id="12_0uf22"]
+[ext_resource type="PackedScene" uid="uid://dhxni84jeiedk" path="res://data/tools/item_display.tscn" id="11_jpu0q"]
+[ext_resource type="Resource" uid="uid://ccnetip18xyof" path="res://data/tools/hoe.tres" id="11_rruha"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o4w62"]
 texture = ExtResource("1_bobcf")
@@ -423,6 +423,7 @@ layer_4/tile_data = PackedInt32Array(65535, 3, 0, 131071, 3, 0, 196607, 3, 0, 0,
 script = ExtResource("3_x08b0")
 
 [node name="Player" type="CharacterBody2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(936, 544)
 scale = Vector2(2, 2)
 motion_mode = 1
@@ -450,23 +451,26 @@ shape = SubResource("CapsuleShape2D_0l54k")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_q570b")
-autoplay = true
 
-[node name="Inventory" type="CanvasLayer" parent="."]
+[node name="Toolbar" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 script = ExtResource("10_sx7c0")
-slot1 = ExtResource("11_rruha")
-slot2 = ExtResource("12_0uf22")
+slot_scene = ExtResource("11_jpu0q")
+slots = Array[Resource("res://data/Item.gd")]([ExtResource("11_rruha")])
 
-[node name="Panel" type="PanelContainer" parent="Inventory"]
-offset_left = 56.0
-offset_top = 568.0
-offset_right = 1976.0
-offset_bottom = 720.0
-size_flags_horizontal = 3
+[node name="Panel" type="PanelContainer" parent="Toolbar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 128)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Inventory/Panel"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Toolbar/Panel"]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 20
 
 [connection signal="destroy" from="Player" to="Map" method="_on_player_destory"]
 [connection signal="place" from="Player" to="Map" method="_on_player_place"]
