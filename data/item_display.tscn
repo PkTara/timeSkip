@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn324rp2pfusv"]
 
-[ext_resource type="Script" path="res://data/tools/item_display.gd" id="1_oirws"]
+[ext_resource type="Script" path="res://data/ItemDisplay.gd" id="1_ytonp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7tqe"]
 expand_margin_left = 5.0
@@ -15,7 +15,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_n7tqe")
-script = ExtResource("1_oirws")
+script = ExtResource("1_ytonp")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 unique_name_in_owner = true

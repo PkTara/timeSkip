@@ -1,13 +1,39 @@
 class_name InventorySlots
 extends CanvasLayer
 
-
 @onready var panel = %Panel
+@onready var player = %Player
 
 @export var slot_scene:PackedScene
 @export var slots:Array[Item] = []
 
-var currentTool = 0
+class Tool extends Node:
+	func leftClick(singals:Object):
+		pass
+	func rightClick(signals:Object):
+		pass
+		
+
+class ToolHoe extends Tool:
+	func leftClick(signals):
+		signals["destroy"].emit("grass")
+	func rightClick(signals):
+		signals["place"].emit("soil")
+
+		
+class ToolWood extends Tool:
+	func leftClick(signals):
+		print("Wood left")
+	func rightClick(signals):
+		print("Wood right")
+		
+var tools = {
+	"Hoe": ToolHoe.new(),
+	"Wood": ToolWood.new()
+}
+		
+
+var currentTool: String
 var slotDisplays = []
 
 # Called when the node enters the scene tree for the first time.
@@ -29,8 +55,10 @@ func selectSlot(number):
 	
 	if number < len(slotDisplays):
 		slotDisplays[number].select(true)
-		currentTool = slots[number]
+		currentTool = slots[number].name
 
+func getCurrentTool():
+	return(tools[currentTool])
 	
 func _unhandled_input(event):
 	for i in range(1, 5): 

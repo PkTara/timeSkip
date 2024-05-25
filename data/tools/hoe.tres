@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://ctgec1e5g367g"]
+
+[ext_resource type="Script" path="res://data/Item.gd" id="1_enr7j"]
+[ext_resource type="Texture2D" uid="uid://cx1bxt2kxw2st" path="res://data/img/hoe.png" id="2_r6ia2"]
+
+[resource]
+script = ExtResource("1_enr7j")
+name = "Hoe"
+texture = ExtResource("2_r6ia2")
