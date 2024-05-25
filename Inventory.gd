@@ -3,16 +3,11 @@ extends CanvasLayer
 
 
 @onready var panel = %Panel
-@onready var player = get_tree().get_first_node_in_group("player")
-
 
 @export var slot_scene:PackedScene
-
 @export var slots:Array[Item] = []
 
 var currentTool = 0
-
-
 var slotDisplays = []
 
 # Called when the node enters the scene tree for the first time.
@@ -33,8 +28,8 @@ func selectSlot(number):
 		slot.select(false)
 	
 	if number < len(slotDisplays):
-		currentTool = slots[number]
 		slotDisplays[number].select(true)
+		currentTool = slots[number]
 
 	
 func _unhandled_input(event):
