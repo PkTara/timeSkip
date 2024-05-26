@@ -25,7 +25,8 @@ class ToolWood extends Tool:
 	func leftClick(signals):
 		print("Wood left")
 	func rightClick(signals):
-		print("Wood right")
+		signals["place"].emit("wood")
+		print("woodRight")
 		
 var tools = {
 	"Hoe": ToolHoe.new(),

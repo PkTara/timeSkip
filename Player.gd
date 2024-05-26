@@ -41,15 +41,11 @@ func playerMovement():
 		
 	return(velocity)
 	
-func tileChange(tile):
-	if (position - get_global_mouse_position()).length() < 300: # TODO: Place at limits of reach
-		if tile == "till":
-			place.emit("soil")
-		elif tile == "destroy":
-			destroy.emit("grass")
 
 	# TODO: Add Till animation
 	
+	
+# if (position - get_global_mouse_position()).length() < 300:
 func _physics_process(delta):
 	changeRunningValue() # if shift is pressed
 	velocity = playerMovement() 
@@ -60,8 +56,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("rightClick"): 
 		toolbar.getCurrentTool().rightClick(signals)
 	
-		
-		
 		
 	if Input.is_action_just_pressed("esc"): get_tree().quit()
 	move_and_slide()
