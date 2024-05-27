@@ -1,18 +1,22 @@
 extends TileMap
 
+
 class Tiles:
 	var layer:int
 	var sourceID:int
 	var atlas:Vector2i
-	func _init(layeri, sourceIDi, atlasi):
+	
+	var list = {}
+	func _init(layeri, sourceIDi, atlasi, name):
 		layer = layeri
 		sourceID = sourceIDi
 		atlas = atlasi
+		list[name] = self
 
-var soil = Tiles.new(3, 2, Vector2i(0,0))
-var wood = Tiles.new(1, 0, Vector2i(13,1))
-var grass = Tiles.new(1, 0, Vector2i(4, 1))
-var sea = Tiles.new(0, 0, Vector2i(1,1))
+var soil = Tiles.new(3, 2, Vector2i(0,0), "soil")
+var wood = Tiles.new(1, 0, Vector2i(13,1), "wood")
+var grass = Tiles.new(1, 0, Vector2i(4, 1), "grass")
+var sea = Tiles.new(0, 0, Vector2i(1,1), "sea")
 
 var can_place_wood_custom_data = "can_place_dirt"
 var tiles = {
@@ -28,7 +32,6 @@ var destroyable = [Vector2i(2,0), Vector2i(0,0)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(soil.atlas)
 	pass # Replace with function body.
 
 
@@ -43,7 +46,7 @@ func _process(delta):
 func _on_player_place(tile):
 	var coord = local_to_map(get_local_mouse_position())
 	if tile == "soil":
-		var tileObj = tiles["soil"]
+		var tileObj = ["soil"]
 		
 		
 		if get_cell_atlas_coords(1, coord) == tiles["grass"].atlas and get_cell_atlas_coords(3, coord) == Vector2i(-1, -1) and get_cell_atlas_coords(4, coord) == Vector2i(-1, -1):

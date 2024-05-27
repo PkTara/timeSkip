@@ -7,36 +7,36 @@ extends CanvasLayer
 @export var slot_scene:PackedScene
 @export var slots:Array[Item] = []
 
-class Tool extends Node:
-	func leftClick(singals:Object):
-		pass
-	func rightClick(signals:Object):
-		pass
-		
-
-class ToolHoe extends Tool:
-	func leftClick(signals):
-		signals["destroy"].emit("grass")
-	func rightClick(signals):
-		signals["place"].emit("soil")
-
-		
-class ToolWood extends Tool:
-	func leftClick(signals):
-		print("Wood left")
-	func rightClick(signals):
-		signals["place"].emit("wood")
-		print("woodRight")
-		
-var tools = {
-	"Hoe": ToolHoe.new(),
-	"Wood": ToolWood.new()
-}
+#class Tool extends Node:
+	#func leftClick(singals:Object):
+		#pass
+	#func rightClick(signals:Object):
+		#pass
+		#
+#
+#class ToolHoe extends Tool:
+	#func leftClick(signals):
+		#signals["destroy"].emit("grass")
+	#func rightClick(signals):
+		#signals["place"].emit("soil")
+#
+		#
+#class ToolWood extends Tool:
+	#func leftClick(signals):
+		#print("Wood left")
+	#func rightClick(signals):
+		#signals["place"].emit("wood")
+		#print("woodRight")
+		#
+#var tools = {
+	#"Hoe": ToolHoe.new(),
+	#"Wood": ToolWood.new()
+#}
 		
 
 var currentTool: String
 var slotDisplays = []
-
+var tools = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	
@@ -47,6 +47,7 @@ func _ready():
 			instance.display(slot)
 			
 			slotDisplays.append(instance)
+			tools[slot.name] = load(slot.scriptString).new()
 			
 	selectSlot(0)
 		

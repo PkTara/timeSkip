@@ -7,3 +7,4 @@
 script = ExtResource("1_wsu1y")
 name = "Wood"
 texture = ExtResource("2_jhja7")
+scriptString = "res://data/toolScripts/block.gd"

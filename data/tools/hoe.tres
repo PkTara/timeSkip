@@ -7,3 +7,4 @@
 script = ExtResource("1_enr7j")
 name = "Hoe"
 texture = ExtResource("2_r6ia2")
+scriptString = "res://data/toolScripts/hoe.gd"
