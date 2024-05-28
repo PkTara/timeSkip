@@ -1,12 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dn324rp2pfusv"]
 
 [ext_resource type="Script" path="res://data/ItemDisplay.gd" id="1_ytonp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n7tqe"]
-expand_margin_left = 5.0
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
+[ext_resource type="Texture2D" uid="uid://b65uuhqwdjscy" path="res://data/img/slot.png" id="2_267fq"]
 
 [node name="ItemDisplay" type="PanelContainer"]
 anchors_preset = 15
@@ -14,16 +9,28 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_n7tqe")
 script = ExtResource("1_ytonp")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="slot" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_267fq")
+
+[node name="item" type="TextureRect" parent="."]
 unique_name_in_owner = true
 layout_mode = 2
 expand_mode = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Quantity" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
 size_flags_vertical = 8

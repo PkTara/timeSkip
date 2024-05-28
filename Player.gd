@@ -56,6 +56,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("rightClick"): 
 		toolbar.getCurrentTool().rightClick(signals)
 	
+	if Input.is_action_just_released("inventory"):
+		if $"../Inventory".is_visible(): $"../Inventory".hide()
+		else: $"../Inventory".show()
 		
 	if Input.is_action_just_pressed("esc"): get_tree().quit()
 	move_and_slide()

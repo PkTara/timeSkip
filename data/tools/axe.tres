@@ -8,3 +8,4 @@ script = ExtResource("1_m0gr0")
 name = "Axe"
 texture = ExtResource("2_40nlv")
 scriptString = "res://data/toolScripts/axe.gd"
+max_stack_size = 64

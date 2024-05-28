@@ -1,29 +1,33 @@
 extends TileMap
 
+signal removedTile(tile)
 
 class Tiles:
 	var layer:int
 	var sourceID:int
 	var atlas:Vector2i
+	var drops:String
 	
-	var list = {}
-	func _init(layeri, sourceIDi, atlasi, name):
+	func _init(layeri:int, sourceIDi:int, atlasi:Vector2i, name:String, dropsi=""):
 		layer = layeri
 		sourceID = sourceIDi
 		atlas = atlasi
-		list[name] = self
+		drops = dropsi
 
-var soil = Tiles.new(3, 2, Vector2i(0,0), "soil")
-var wood = Tiles.new(1, 0, Vector2i(13,1), "wood")
-var grass = Tiles.new(1, 0, Vector2i(4, 1), "grass")
-var sea = Tiles.new(0, 0, Vector2i(1,1), "sea")
+
+#var soil = Tiles.new(3, 2, Vector2i(0,0), "soil")
+#var wood = Tiles.new(1, 0, Vector2i(13,1), "wood")
+#var grass = Tiles.new(1, 0, Vector2i(4, 1), "grass")
+#var sea = Tiles.new(0, 0, Vector2i(1,1), "sea")
 
 var can_place_wood_custom_data = "can_place_dirt"
 var tiles = {
-	"soil": soil,
-	"wood": wood,
-	"grass" : grass,
-	"sea" : sea
+	"soil": Tiles.new(3, 2, Vector2i(0,0), "soil"),
+	"wood": Tiles.new(1, 0, Vector2i(13,1), "wood"),
+	"grass" : Tiles.new(1, 0, Vector2i(4, 1), "grass"),
+	"sea" : Tiles.new(0, 0, Vector2i(1,1), "sea"),
+	"tree" : Tiles.new(4, 3, Vector2i(0,0), "tree", "res://data/tools/wood.tres"),
+	"herb" : Tiles.new(3, 3, Vector2i(2, 0), "herb")
 }
 
 var dirtCells = []
@@ -66,8 +70,13 @@ func _on_player_place(tile):
 
 func _on_player_destory(tile):
 	var coord = local_to_map(get_local_mouse_position())
-	if tile == "grass":
-		var atlas = Vector2i(-1, -1)
-		if get_cell_atlas_coords(3, coord) in destroyable:
-			set_cell(3, coord, 2, atlas)
+	var atlasRemove = Vector2i(-1, -1)
+	
+	if tiles[tile]:
+		if get_cell_atlas_coords(tiles[tile].layer, coord) == tiles[tile].atlas:
+			set_cell(tiles[tile].layer, coord, tiles[tile].sourceID, atlasRemove)
+			if tiles[tile].drops:
+				removedTile.emit(load(tiles[tile].drops))
+			
+
 	
