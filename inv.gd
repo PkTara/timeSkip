@@ -35,6 +35,7 @@ func add_item(item):
 			added = true
 		elif !(slot.texture_rect.texture):
 			slot.display(item)
+			slot.addQuantity(1)
 			added = true
 		if added:
 			toolbar.add_item(item)

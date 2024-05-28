@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b65uuhqwdjscy" path="res://data/img/slot.png" id="2_267fq"]
 
 [node name="ItemDisplay" type="PanelContainer"]
+custom_minimum_size = Vector2(32, 32)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,6 +15,7 @@ script = ExtResource("1_ytonp")
 [node name="slot" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_267fq")
+expand_mode = 3
 
 [node name="item" type="TextureRect" parent="."]
 unique_name_in_owner = true

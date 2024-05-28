@@ -33,6 +33,7 @@ func add_item(item):
 			tools[item.name] = load(item.scriptString).new()
 			return(1)
 		elif !(slot.texture_rect.texture):
+			slot.addQuantity(1)
 			slot.display(item)
 			slots.append(item)
 			tools[item.name] = load(item.scriptString).new()
